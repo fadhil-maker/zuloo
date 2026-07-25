@@ -153,6 +153,16 @@ export default function AdminPage() {
     fetchData();
   };
 
+  const handleToggleActive = async (table: 'services' | 'works' | 'testimonials', id: string, currentStatus: boolean) => {
+    const { error } = await supabase.from(table).update({ is_active: !currentStatus }).eq('id', id);
+    if (!error) {
+      showToast('Visibility updated');
+      fetchData();
+    } else {
+      showToast('Error updating visibility');
+    }
+  };
+
   const handleUpdateContact = async (e: React.FormEvent) => {
     e.preventDefault();
     if (contact) {
@@ -263,7 +273,13 @@ export default function AdminPage() {
                       <p>{s.description}</p>
                     </div>
                   </div>
-                  <button className="admin-btn admin-btn--danger" onClick={() => handleDeleteService(s.id)}>Delete</button>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem' }}>
+                      <input type="checkbox" checked={s.is_active ?? true} onChange={() => handleToggleActive('services', s.id, s.is_active ?? true)} />
+                      Active
+                    </label>
+                    <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteService(s.id)}>Delete</button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -316,7 +332,13 @@ export default function AdminPage() {
                       {w.live_url && <a href={w.live_url} target="_blank" rel="noopener noreferrer" className="admin-item__link">↗ {w.live_url}</a>}
                     </div>
                   </div>
-                  <button className="admin-btn admin-btn--danger" onClick={() => handleDeleteWork(w.id)}>Delete</button>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem' }}>
+                      <input type="checkbox" checked={w.is_active ?? true} onChange={() => handleToggleActive('works', w.id, w.is_active ?? true)} />
+                      Active
+                    </label>
+                    <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteWork(w.id)}>Delete</button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -354,7 +376,13 @@ export default function AdminPage() {
                       <div className="admin-item__stars">{'★'.repeat(t.rating)}{'☆'.repeat(5 - t.rating)}</div>
                     </div>
                   </div>
-                  <button className="admin-btn admin-btn--danger" onClick={() => handleDeleteTestimonial(t.id)}>Delete</button>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'flex-end' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontSize: '0.9rem' }}>
+                      <input type="checkbox" checked={t.is_active ?? true} onChange={() => handleToggleActive('testimonials', t.id, t.is_active ?? true)} />
+                      Active
+                    </label>
+                    <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteTestimonial(t.id)}>Delete</button>
+                  </div>
                 </div>
               ))}
             </div>

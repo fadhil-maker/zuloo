@@ -19,15 +19,19 @@ export default async function Home() {
     getTestimonials(),
   ]);
 
+  const activeServices = services.filter(s => s.is_active !== false);
+  const activeWorks = works.filter(w => w.is_active !== false);
+  const activeTestimonials = testimonials.filter(t => t.is_active !== false);
+
   return (
     <>
       <ScrollReveal />
       <Navbar />
       <main>
         <Hero tagline={contact?.tagline} />
-        {contact?.show_services !== false && <Services services={services} />}
-        {contact?.show_works !== false && <Works works={works} />}
-        {contact?.show_testimonials !== false && <Testimonials testimonials={testimonials} />}
+        {contact?.show_services !== false && <Services services={activeServices} />}
+        {contact?.show_works !== false && <Works works={activeWorks} />}
+        {contact?.show_testimonials !== false && <Testimonials testimonials={activeTestimonials} />}
         <Contact contact={contact} />
       </main>
       <Footer />

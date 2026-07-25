@@ -28,6 +28,7 @@ export interface Service {
   description: string;
   icon: string;
   sort_order: number;
+  is_active: boolean;
   created_at: string;
 }
 
@@ -39,6 +40,7 @@ export interface Work {
   live_url: string;
   tags: string[];
   featured: boolean;
+  is_active: boolean;
   created_at: string;
 }
 
@@ -49,6 +51,7 @@ export interface Testimonial {
   content: string;
   rating: number;
   avatar_url: string;
+  is_active: boolean;
   created_at: string;
 }
 
