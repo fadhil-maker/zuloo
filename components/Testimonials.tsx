@@ -9,7 +9,7 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
   return (
     <section className="testimonials container" id="testimonials">
       <div className="text-center reveal">
-        <h5 className="text-accent" style={{ letterSpacing: '2px' }}>REVIEWS</h5>
+        <span className="text-accent h5-style" style={{ letterSpacing: '2px', display: 'block', textTransform: 'uppercase', marginBottom: '0.5rem', fontSize: '0.83em', fontWeight: 'bold' }}>REVIEWS</span>
         <h2>What Clients Say</h2>
       </div>
 

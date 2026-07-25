@@ -14,9 +14,9 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
 
   return (
     <section className="contact container" id="contact">
-      <div className="text-center reveal" style={{ marginBottom: '3rem' }}>
-        <h5 className="text-accent" style={{ letterSpacing: '2px' }}>GET IN TOUCH</h5>
-        <h2>Let&apos;s Build Together</h2>
+      <div className="text-center reveal" style={{ marginBottom: '4rem' }}>
+        <span className="text-accent h5-style" style={{ letterSpacing: '2px', display: 'block', textTransform: 'uppercase', marginBottom: '0.5rem', fontSize: '0.83em', fontWeight: 'bold' }}>GET IN TOUCH</span>
+        <h2 style={{ fontSize: '3.5rem', fontWeight: 800 }}>Let&apos;s Build Together</h2>
         <p style={{ maxWidth: '600px', margin: '0 auto' }}>
           Got an idea? We&apos;d love to hear it. Reach out — we reply fast.
         </p>

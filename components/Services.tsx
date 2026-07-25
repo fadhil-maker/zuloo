@@ -35,7 +35,7 @@ export default function Services({ services }: { services: Service[] }) {
   return (
     <section className="services container" id="services">
       <div className="text-center reveal" style={{ marginBottom: '3rem' }}>
-        <h5 className="text-accent" style={{ letterSpacing: '2px' }}>WHAT WE DO</h5>
+        <span className="text-accent h5-style" style={{ letterSpacing: '2px', display: 'block', textTransform: 'uppercase', marginBottom: '0.5rem', fontSize: '0.83em', fontWeight: 'bold' }}>WHAT WE DO</span>
         <h2>Our Services</h2>
         <p style={{ maxWidth: '600px', margin: '0 auto' }}>
           Everything you need to launch and grow your online presence.

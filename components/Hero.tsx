@@ -10,7 +10,7 @@ export default function Hero({ tagline }: { tagline?: string }) {
     <section className="hero" id="hero">
       <div className="blob"></div>
       <div className="container hero-content">
-        <h5 className="text-accent" style={{ letterSpacing: '3px', marginBottom: '1.5rem', fontWeight: 600 }}>WEB DEVELOPMENT STUDIO</h5>
+        <span className="text-accent h5-style" style={{ letterSpacing: '3px', marginBottom: '1.5rem', fontWeight: 600, display: 'block', textTransform: 'uppercase' }}>WEB DEVELOPMENT STUDIO</span>
         <h1 style={{ marginBottom: '1.5rem', fontSize: 'clamp(2.5rem, 8vw, 5rem)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
           We build websites
           <br />

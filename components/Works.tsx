@@ -13,7 +13,7 @@ export default function Works({ works }: { works: Work[] }) {
   return (
     <section className="portfolio container" id="works">
       <div className="text-center reveal" style={{ marginBottom: '5rem' }}>
-        <h5 className="text-accent" style={{ letterSpacing: '2px' }}>PORTFOLIO</h5>
+        <span className="text-accent h5-style" style={{ letterSpacing: '2px', display: 'block', textTransform: 'uppercase', marginBottom: '0.5rem', fontSize: '0.83em', fontWeight: 'bold' }}>PORTFOLIO</span>
         <h2 style={{ fontSize: '3.5rem', marginTop: '0.5rem', fontWeight: 800 }}>Selected Works</h2>
       </div>
 
