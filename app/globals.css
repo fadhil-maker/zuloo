@@ -150,6 +150,7 @@ p {
 @media (min-width: 768px) {
   .nav-links {
     display: flex;
+    align-items: center;
     gap: 2rem;
   }
 }
@@ -531,10 +532,42 @@ textarea.form-control {
   align-items: center;
   gap: 1.5rem;
 }
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+.footer-right {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
 @media (min-width: 768px) {
+  .footer {
+    text-align: left;
+  }
   .footer-content {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left {
+    align-items: flex-start;
+  }
+  .footer-links {
+    margin: 0;
+  }
+  .footer-right {
+    text-align: right;
   }
 }
 
