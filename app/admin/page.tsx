@@ -27,6 +27,10 @@ export default function AdminPage() {
   const [testimonialForm, setTestimonialForm] = useState({ client_name: '', client_role: '', content: '', rating: 5 });
   const [contactForm, setContactForm] = useState({ phone: '', email: '', whatsapp: '', instagram: '', tagline: '', show_services: true, show_works: true, show_testimonials: true });
 
+  const [editingServiceId, setEditingServiceId] = useState<string | null>(null);
+  const [editingWorkId, setEditingWorkId] = useState<string | null>(null);
+  const [editingTestimonialId, setEditingTestimonialId] = useState<string | null>(null);
+
   const showToast = (msg: string) => {
     setToast(msg);
     setTimeout(() => setToast(''), 3000);
@@ -103,12 +107,33 @@ export default function AdminPage() {
 
   const handleAddService = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await supabase.from('services').insert([serviceForm]);
-    if (!error) {
-      setServiceForm({ title: '', description: '', icon: '🌐', sort_order: 0 });
-      showToast('Service added! ✅');
-      fetchData();
+    if (editingServiceId) {
+      const { error } = await supabase.from('services').update(serviceForm).eq('id', editingServiceId);
+      if (!error) {
+        setServiceForm({ title: '', description: '', icon: '🌐', sort_order: 0 });
+        setEditingServiceId(null);
+        showToast('Service updated! ✅');
+        fetchData();
+      }
+    } else {
+      const { error } = await supabase.from('services').insert([serviceForm]);
+      if (!error) {
+        setServiceForm({ title: '', description: '', icon: '🌐', sort_order: 0 });
+        showToast('Service added! ✅');
+        fetchData();
+      }
     }
+  };
+
+  const handleEditService = (s: any) => {
+    setEditingServiceId(s.id);
+    setServiceForm({ title: s.title, description: s.description, icon: s.icon, sort_order: s.sort_order });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const cancelEditService = () => {
+    setEditingServiceId(null);
+    setServiceForm({ title: '', description: '', icon: '🌐', sort_order: 0 });
   };
 
   const handleDeleteService = async (id: string) => {
@@ -121,12 +146,35 @@ export default function AdminPage() {
   const handleAddWork = async (e: React.FormEvent) => {
     e.preventDefault();
     const tags = workForm.tags.split(',').map((t) => t.trim()).filter(Boolean);
-    const { error } = await supabase.from('works').insert([{ ...workForm, tags }]);
-    if (!error) {
-      setWorkForm({ title: '', description: '', image_url: '', live_url: '', tags: '' });
-      showToast('Work added! ✅');
-      fetchData();
+    const data = { ...workForm, tags };
+    
+    if (editingWorkId) {
+      const { error } = await supabase.from('works').update(data).eq('id', editingWorkId);
+      if (!error) {
+        setWorkForm({ title: '', description: '', image_url: '', live_url: '', tags: '' });
+        setEditingWorkId(null);
+        showToast('Work updated! ✅');
+        fetchData();
+      }
+    } else {
+      const { error } = await supabase.from('works').insert([data]);
+      if (!error) {
+        setWorkForm({ title: '', description: '', image_url: '', live_url: '', tags: '' });
+        showToast('Work added! ✅');
+        fetchData();
+      }
     }
+  };
+
+  const handleEditWork = (w: any) => {
+    setEditingWorkId(w.id);
+    setWorkForm({ title: w.title, description: w.description, image_url: w.image_url, live_url: w.live_url || '', tags: Array.isArray(w.tags) ? w.tags.join(', ') : w.tags });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const cancelEditWork = () => {
+    setEditingWorkId(null);
+    setWorkForm({ title: '', description: '', image_url: '', live_url: '', tags: '' });
   };
 
   const handleDeleteWork = async (id: string) => {
@@ -138,12 +186,33 @@ export default function AdminPage() {
 
   const handleAddTestimonial = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { error } = await supabase.from('testimonials').insert([testimonialForm]);
-    if (!error) {
-      setTestimonialForm({ client_name: '', client_role: '', content: '', rating: 5 });
-      showToast('Testimonial added! ✅');
-      fetchData();
+    if (editingTestimonialId) {
+      const { error } = await supabase.from('testimonials').update(testimonialForm).eq('id', editingTestimonialId);
+      if (!error) {
+        setTestimonialForm({ client_name: '', client_role: '', content: '', rating: 5 });
+        setEditingTestimonialId(null);
+        showToast('Testimonial updated! ✅');
+        fetchData();
+      }
+    } else {
+      const { error } = await supabase.from('testimonials').insert([testimonialForm]);
+      if (!error) {
+        setTestimonialForm({ client_name: '', client_role: '', content: '', rating: 5 });
+        showToast('Testimonial added! ✅');
+        fetchData();
+      }
     }
+  };
+
+  const handleEditTestimonial = (t: any) => {
+    setEditingTestimonialId(t.id);
+    setTestimonialForm({ client_name: t.client_name, client_role: t.client_role || '', content: t.content, rating: t.rating });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const cancelEditTestimonial = () => {
+    setEditingTestimonialId(null);
+    setTestimonialForm({ client_name: '', client_role: '', content: '', rating: 5 });
   };
 
   const handleDeleteTestimonial = async (id: string) => {
@@ -254,12 +323,15 @@ export default function AdminPage() {
         {activeTab === 'services' && (
           <>
             <form onSubmit={handleAddService} className="admin-form">
-              <h3>Add Service</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3>{editingServiceId ? 'Edit Service' : 'Add Service'}</h3>
+                {editingServiceId && <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelEditService} style={{ padding: '0.5rem 1rem' }}>Cancel</button>}
+              </div>
               <input className="admin-input" placeholder="Icon (emoji)" value={serviceForm.icon} onChange={(e) => setServiceForm({ ...serviceForm, icon: e.target.value })} />
               <input className="admin-input" placeholder="Title" value={serviceForm.title} onChange={(e) => setServiceForm({ ...serviceForm, title: e.target.value })} required />
               <textarea className="admin-input" placeholder="Description" value={serviceForm.description} onChange={(e) => setServiceForm({ ...serviceForm, description: e.target.value })} required rows={3} />
               <input className="admin-input" type="number" placeholder="Sort order" value={serviceForm.sort_order} onChange={(e) => setServiceForm({ ...serviceForm, sort_order: Number(e.target.value) })} />
-              <button type="submit" className="admin-btn admin-btn--primary">Add Service</button>
+              <button type="submit" className="admin-btn admin-btn--primary">{editingServiceId ? 'Update Service' : 'Add Service'}</button>
             </form>
 
             <div className="admin-list">
@@ -278,7 +350,10 @@ export default function AdminPage() {
                       <input type="checkbox" checked={s.is_active ?? true} onChange={() => handleToggleActive('services', s.id, s.is_active ?? true)} />
                       Active
                     </label>
-                    <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteService(s.id)}>Delete</button>
+                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                      <button className="admin-btn admin-btn--ghost" style={{ padding: '0.5rem 1rem' }} onClick={() => handleEditService(s)}>Edit</button>
+                      <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteService(s.id)}>Delete</button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -290,7 +365,10 @@ export default function AdminPage() {
         {activeTab === 'works' && (
           <>
             <form onSubmit={handleAddWork} className="admin-form">
-              <h3>Add Work</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3>{editingWorkId ? 'Edit Work' : 'Add Work'}</h3>
+                {editingWorkId && <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelEditWork} style={{ padding: '0.5rem 1rem' }}>Cancel</button>}
+              </div>
               <input className="admin-input" placeholder="Project title" value={workForm.title} onChange={(e) => setWorkForm({ ...workForm, title: e.target.value })} required />
               <textarea className="admin-input" placeholder="Description" value={workForm.description} onChange={(e) => setWorkForm({ ...workForm, description: e.target.value })} required rows={3} />
               <input className="admin-input" placeholder="Live URL (https://...)" value={workForm.live_url} onChange={(e) => setWorkForm({ ...workForm, live_url: e.target.value })} />
@@ -317,7 +395,7 @@ export default function AdminPage() {
                 </label>
                 {workForm.image_url && <span className="admin-upload__preview">✅ Image ready</span>}
               </div>
-              <button type="submit" className="admin-btn admin-btn--primary">Add Work</button>
+              <button type="submit" className="admin-btn admin-btn--primary">{editingWorkId ? 'Update Work' : 'Add Work'}</button>
             </form>
 
             <div className="admin-list">
@@ -337,7 +415,10 @@ export default function AdminPage() {
                       <input type="checkbox" checked={w.is_active ?? true} onChange={() => handleToggleActive('works', w.id, w.is_active ?? true)} />
                       Active
                     </label>
-                    <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteWork(w.id)}>Delete</button>
+                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                      <button className="admin-btn admin-btn--ghost" style={{ padding: '0.5rem 1rem' }} onClick={() => handleEditWork(w)}>Edit</button>
+                      <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteWork(w.id)}>Delete</button>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -349,7 +430,10 @@ export default function AdminPage() {
         {activeTab === 'testimonials' && (
           <>
             <form onSubmit={handleAddTestimonial} className="admin-form">
-              <h3>Add Testimonial</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3>{editingTestimonialId ? 'Edit Testimonial' : 'Add Testimonial'}</h3>
+                {editingTestimonialId && <button type="button" className="admin-btn admin-btn--ghost" onClick={cancelEditTestimonial} style={{ padding: '0.5rem 1rem' }}>Cancel</button>}
+              </div>
               <input className="admin-input" placeholder="Client name" value={testimonialForm.client_name} onChange={(e) => setTestimonialForm({ ...testimonialForm, client_name: e.target.value })} required />
               <input className="admin-input" placeholder="Client role (e.g. CEO, Founder)" value={testimonialForm.client_role} onChange={(e) => setTestimonialForm({ ...testimonialForm, client_role: e.target.value })} />
               <textarea className="admin-input" placeholder="What did the client say?" value={testimonialForm.content} onChange={(e) => setTestimonialForm({ ...testimonialForm, content: e.target.value })} required rows={4} />
@@ -361,7 +445,7 @@ export default function AdminPage() {
                   </button>
                 ))}
               </div>
-              <button type="submit" className="admin-btn admin-btn--primary">Add Testimonial</button>
+              <button type="submit" className="admin-btn admin-btn--primary">{editingTestimonialId ? 'Update Testimonial' : 'Add Testimonial'}</button>
             </form>
 
             <div className="admin-list">
@@ -381,7 +465,10 @@ export default function AdminPage() {
                       <input type="checkbox" checked={t.is_active ?? true} onChange={() => handleToggleActive('testimonials', t.id, t.is_active ?? true)} />
                       Active
                     </label>
-                    <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteTestimonial(t.id)}>Delete</button>
+                    <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
+                      <button className="admin-btn admin-btn--ghost" style={{ padding: '0.5rem 1rem' }} onClick={() => handleEditTestimonial(t)}>Edit</button>
+                      <button className="admin-btn admin-btn--danger" style={{ padding: '0.5rem 1rem' }} onClick={() => handleDeleteTestimonial(t.id)}>Delete</button>
+                    </div>
                   </div>
                 </div>
               ))}
