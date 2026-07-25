@@ -48,7 +48,7 @@ export default function Navbar() {
           </a>
         </div>
 
-        <button className="hamburger" onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
+        <button className={`hamburger ${isOpen ? 'active' : ''}`} onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
           <span />
           <span />
           <span />
