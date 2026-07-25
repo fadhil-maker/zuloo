@@ -16,7 +16,7 @@ export default function Works({ works }: { works: Work[] }) {
         <h2 style={{ fontSize: '3.5rem', marginTop: '0.5rem', fontWeight: 800 }}>Selected Works</h2>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', zIndex: 10, position: 'relative' }}>
+      <div className="view-toggle-container">
         <button 
           onClick={() => { setViewMode('stack'); setHasToggled(true); }} 
           style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'stack' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'stack' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}

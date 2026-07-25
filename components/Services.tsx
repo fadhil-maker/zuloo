@@ -19,7 +19,7 @@ export default function Services({ services }: { services: Service[] }) {
         </p>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', zIndex: 10, position: 'relative' }}>
+      <div className="view-toggle-container">
         <button 
           onClick={() => { setViewMode('grid'); setHasToggled(true); }} 
           style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
