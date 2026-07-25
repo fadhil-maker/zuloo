@@ -371,7 +371,18 @@ export default function AdminPage() {
               </div>
               <input className="admin-input" placeholder="Project title" value={workForm.title} onChange={(e) => setWorkForm({ ...workForm, title: e.target.value })} required />
               <textarea className="admin-input" placeholder="Description" value={workForm.description} onChange={(e) => setWorkForm({ ...workForm, description: e.target.value })} required rows={3} />
-              <input className="admin-input" placeholder="Live URL (https://...)" value={workForm.live_url} onChange={(e) => setWorkForm({ ...workForm, live_url: e.target.value })} />
+              <input 
+                className="admin-input" 
+                placeholder="Live URL (https://...)" 
+                value={workForm.live_url} 
+                onChange={(e) => setWorkForm({ ...workForm, live_url: e.target.value })}
+                onBlur={() => {
+                  if (workForm.live_url && !workForm.image_url) {
+                    setWorkForm({ ...workForm, image_url: `https://image.thum.io/get/width/1200/crop/800/${workForm.live_url}` });
+                    showToast('Preview auto-fetched! 📸');
+                  }
+                }}
+              />
               <input className="admin-input" placeholder="Tags (comma-separated)" value={workForm.tags} onChange={(e) => setWorkForm({ ...workForm, tags: e.target.value })} />
               <div className="admin-upload">
                 <label className="admin-btn admin-btn--glass">
@@ -393,7 +404,18 @@ export default function AdminPage() {
                     }}
                   />
                 </label>
-                {workForm.image_url && <span className="admin-upload__preview">✅ Image ready</span>}
+                {workForm.image_url && (
+                  <div style={{ marginTop: '1rem', width: '100%', maxWidth: '300px', borderRadius: '1rem', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <img src={workForm.image_url} alt="Preview" style={{ width: '100%', height: 'auto', display: 'block' }} />
+                    <button 
+                      type="button" 
+                      onClick={() => setWorkForm({ ...workForm, image_url: '' })}
+                      style={{ width: '100%', padding: '0.5rem', background: 'rgba(255,0,0,0.2)', color: 'red', border: 'none', cursor: 'pointer', fontWeight: 'bold' }}
+                    >
+                      Remove Image
+                    </button>
+                  </div>
+                )}
               </div>
               <button type="submit" className="admin-btn admin-btn--primary">{editingWorkId ? 'Update Work' : 'Add Work'}</button>
             </form>
