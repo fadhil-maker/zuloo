@@ -1,6 +1,7 @@
 'use client';
 
 import { Testimonial } from '@/lib/supabase';
+import Image from 'next/image';
 
 export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   if (!testimonials.length) return null;
@@ -25,7 +26,7 @@ export default function Testimonials({ testimonials }: { testimonials: Testimoni
             </blockquote>
             <div className="testimonial-author">
               {t.avatar_url ? (
-                <img src={t.avatar_url} alt={t.client_name} className="author-avatar" />
+                <Image src={t.avatar_url} alt={t.client_name} width={50} height={50} className="author-avatar" style={{ objectFit: 'cover' }} />
               ) : (
                 <div className="author-avatar" style={{ background: 'var(--accent)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--bg-color)' }}>
                   {t.client_name.charAt(0)}

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Work } from '@/lib/supabase';
 
 export default function Works({ works }: { works: Work[] }) {
@@ -35,9 +36,9 @@ export default function Works({ works }: { works: Work[] }) {
         <div className="grid">
           {works.map((work, i) => (
             <article key={work.id} className={`glass-card reveal ${hasToggled ? 'active' : ''}`} style={{ transitionDelay: `${(i % 3) * 0.1}s`, display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.5rem' }}>
-              <div style={{ aspectRatio: '16/9', borderRadius: '1rem', overflow: 'hidden', background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ aspectRatio: '16/9', borderRadius: '1rem', overflow: 'hidden', background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                 {work.image_url ? (
-                  <img src={work.image_url} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
+                  <Image src={work.image_url} alt={work.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'cover' }} />
                 ) : (
                   <span style={{ fontSize: '3rem', opacity: 0.5 }}>🌐</span>
                 )}
@@ -96,11 +97,13 @@ export default function Works({ works }: { works: Work[] }) {
                 
                 <div className="portfolio-image-wrapper group order-1 lg:order-2">
                   {work.image_url ? (
-                    <img
+                    <Image
                       src={work.image_url}
                       alt={work.title}
                       className="portfolio-img"
-                      loading="lazy"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      style={{ objectFit: 'cover' }}
                     />
                   ) : (
                     <div style={{ width: '100%', height: '100%', background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

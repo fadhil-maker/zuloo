@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
 /* 1. CSS Reset & Variables */
 :root {
   --bg-color: #F5F7FA;
@@ -26,7 +24,6 @@
 
 html {
   scroll-behavior: smooth; /* 13. Smooth scrolling */
-  font-family: 'Plus Jakarta Sans', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
@@ -257,6 +254,12 @@ p {
 .hero-content {
   max-width: 800px;
   z-index: 1;
+  animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Buttons */
