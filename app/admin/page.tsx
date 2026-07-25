@@ -376,10 +376,39 @@ export default function AdminPage() {
                 placeholder="Live URL (https://...)" 
                 value={workForm.live_url} 
                 onChange={(e) => setWorkForm({ ...workForm, live_url: e.target.value })}
-                onBlur={() => {
-                  if (workForm.live_url && !workForm.image_url) {
-                    setWorkForm({ ...workForm, image_url: `https://image.thum.io/get/width/1200/crop/800/${workForm.live_url}` });
-                    showToast('Preview auto-fetched! 📸');
+                onBlur={async () => {
+                  if (workForm.live_url) {
+                    try {
+                      let newTitle = workForm.title;
+                      let newDesc = workForm.description;
+                      let newImg = workForm.image_url;
+                      let fetched = false;
+
+                      if (!workForm.title || !workForm.description) {
+                        showToast('Fetching abstract from web... ⏳');
+                        const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(workForm.live_url)}`);
+                        if (res.ok) {
+                          const data = await res.json();
+                          if (data.status === 'success') {
+                            if (!workForm.title && data.data.title) newTitle = data.data.title;
+                            if (!workForm.description && data.data.description) newDesc = data.data.description;
+                            fetched = true;
+                          }
+                        }
+                      }
+                      
+                      if (!workForm.image_url) {
+                        newImg = `https://image.thum.io/get/width/1200/crop/800/${workForm.live_url}`;
+                        fetched = true;
+                      }
+
+                      if (fetched) {
+                        setWorkForm({ ...workForm, title: newTitle, description: newDesc, image_url: newImg });
+                        showToast('Preview & Abstract auto-fetched! 🚀');
+                      }
+                    } catch (e) {
+                      console.error(e);
+                    }
                   }
                 }}
               />
