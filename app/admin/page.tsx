@@ -398,7 +398,7 @@ export default function AdminPage() {
                       }
                       
                       if (!workForm.image_url) {
-                        newImg = `https://image.thum.io/get/width/1200/crop/800/${workForm.live_url}`;
+                        newImg = `https://image.thum.io/get/wait/3/width/1200/crop/800/${workForm.live_url}`;
                         fetched = true;
                       }
 
