@@ -5,6 +5,7 @@ import { Work } from '@/lib/supabase';
 
 export default function Works({ works }: { works: Work[] }) {
   const [viewMode, setViewMode] = useState<'stack' | 'grid'>('stack');
+  const [hasToggled, setHasToggled] = useState(false);
   
   if (!works.length) return null;
 
@@ -17,13 +18,13 @@ export default function Works({ works }: { works: Work[] }) {
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', zIndex: 10, position: 'relative' }}>
         <button 
-          onClick={() => setViewMode('stack')} 
+          onClick={() => { setViewMode('stack'); setHasToggled(true); }} 
           style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'stack' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'stack' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           Stack View
         </button>
         <button 
-          onClick={() => setViewMode('grid')} 
+          onClick={() => { setViewMode('grid'); setHasToggled(true); }} 
           style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           Grid View
@@ -33,7 +34,7 @@ export default function Works({ works }: { works: Work[] }) {
       {viewMode === 'grid' ? (
         <div className="grid">
           {works.map((work, i) => (
-            <article key={work.id} className="glass-card reveal" style={{ transitionDelay: `${(i % 3) * 0.1}s`, display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.5rem' }}>
+            <article key={work.id} className={`glass-card reveal ${hasToggled ? 'active' : ''}`} style={{ transitionDelay: `${(i % 3) * 0.1}s`, display: 'flex', flexDirection: 'column', gap: '1.5rem', padding: '1.5rem' }}>
               <div style={{ aspectRatio: '16/9', borderRadius: '1rem', overflow: 'hidden', background: 'var(--glass-border)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {work.image_url ? (
                   <img src={work.image_url} alt={work.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
@@ -62,7 +63,7 @@ export default function Works({ works }: { works: Work[] }) {
           {works.map((work, i) => (
             <div
               key={work.id}
-              className="portfolio-card-wrapper reveal"
+              className={`portfolio-card-wrapper reveal ${hasToggled ? 'active' : ''}`}
               style={{ 
                 top: `calc(15vh + ${i * 10}px)`, 
                 zIndex: i + 1 

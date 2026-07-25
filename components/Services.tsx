@@ -5,6 +5,7 @@ import { Service } from '@/lib/supabase';
 
 export default function Services({ services }: { services: Service[] }) {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [hasToggled, setHasToggled] = useState(false);
   
   if (!services.length) return null;
 
@@ -20,13 +21,13 @@ export default function Services({ services }: { services: Service[] }) {
 
       <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', zIndex: 10, position: 'relative' }}>
         <button 
-          onClick={() => setViewMode('grid')} 
+          onClick={() => { setViewMode('grid'); setHasToggled(true); }} 
           style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           Grid View
         </button>
         <button 
-          onClick={() => setViewMode('list')} 
+          onClick={() => { setViewMode('list'); setHasToggled(true); }} 
           style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'list' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'list' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           List View
@@ -37,7 +38,7 @@ export default function Services({ services }: { services: Service[] }) {
         {services.map((service, i) => (
           <article
             key={service.id}
-            className="glass-card reveal"
+            className={`glass-card reveal ${hasToggled ? 'active' : ''}`}
             style={{ 
               transitionDelay: `${(i % 3) * 0.1}s`, 
               display: viewMode === 'list' ? 'flex' : 'block',
