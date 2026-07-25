@@ -3,17 +3,7 @@
 import { Testimonial } from '@/lib/supabase';
 
 export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
-  if (!testimonials.length) {
-    return (
-      <section className="testimonials container" id="testimonials">
-        <div className="text-center reveal">
-          <h5 className="text-accent" style={{ letterSpacing: '2px' }}>REVIEWS</h5>
-          <h2>What Clients Say</h2>
-          <p>Our first reviews are on the way. Be our next happy client.</p>
-        </div>
-      </section>
-    );
-  }
+  if (!testimonials.length) return null;
 
   return (
     <section className="testimonials container" id="testimonials">

@@ -3,17 +3,7 @@
 import { Work } from '@/lib/supabase';
 
 export default function Works({ works }: { works: Work[] }) {
-  if (!works.length) {
-    return (
-      <section className="portfolio container" id="works">
-        <div className="text-center reveal">
-          <h5 className="text-accent" style={{ letterSpacing: '2px' }}>PORTFOLIO</h5>
-          <h2>Our Work</h2>
-          <p>Projects launching soon. Stay tuned.</p>
-        </div>
-      </section>
-    );
-  }
+  if (!works.length) return null;
 
   return (
     <section className="portfolio container" id="works">
