@@ -384,22 +384,18 @@ export default function AdminPage() {
                       let newImg = workForm.image_url;
                       let fetched = false;
 
-                      if (!workForm.title || !workForm.description) {
-                        showToast('Fetching abstract from web... ⏳');
-                        const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(workForm.live_url)}`);
+                      if (!workForm.title || !workForm.description || !workForm.image_url) {
+                        showToast('Fetching preview & abstract from web... ⏳');
+                        const res = await fetch(`https://api.microlink.io/?url=${encodeURIComponent(workForm.live_url)}&screenshot=true&meta=true`);
                         if (res.ok) {
                           const data = await res.json();
                           if (data.status === 'success') {
                             if (!workForm.title && data.data.title) newTitle = data.data.title;
                             if (!workForm.description && data.data.description) newDesc = data.data.description;
+                            if (!workForm.image_url && data.data.screenshot?.url) newImg = data.data.screenshot.url;
                             fetched = true;
                           }
                         }
-                      }
-                      
-                      if (!workForm.image_url) {
-                        newImg = `https://image.thum.io/get/wait/3/width/1200/crop/800/${workForm.live_url}`;
-                        fetched = true;
                       }
 
                       if (fetched) {
