@@ -18,7 +18,7 @@ export default function Works({ works }: { works: Work[] }) {
             key={work.id}
             className="portfolio-card-wrapper reveal"
             style={{ 
-              top: `calc(10vh + ${i * 40}px)`, 
+              top: `calc(15vh + ${i * 10}px)`, 
               zIndex: i + 1 
             }}
           >

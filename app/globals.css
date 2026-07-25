@@ -409,8 +409,13 @@ p {
   padding-bottom: 5rem;
 }
 .portfolio-card-wrapper {
-  position: sticky;
+  position: relative;
   transition: transform 0.5s ease;
+}
+@media (min-width: 1024px) {
+  .portfolio-card-wrapper {
+    position: sticky;
+  }
 }
 .portfolio-card {
   background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
