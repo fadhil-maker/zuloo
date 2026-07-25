@@ -37,7 +37,7 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
             </svg>
           </div>
           <div style={{ textAlign: 'left', overflow: 'hidden' }}>
-            <strong style={{ display: 'block', fontSize: '1.1rem', color: '#fff' }}>WhatsApp</strong>
+            <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--text-primary)' }}>WhatsApp</strong>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', display: 'block' }}>Chat with us now</span>
           </div>
         </a>
@@ -50,7 +50,7 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
             </svg>
           </div>
           <div style={{ textAlign: 'left', overflow: 'hidden' }}>
-            <strong style={{ display: 'block', fontSize: '1.1rem', color: '#fff' }}>Call Us</strong>
+            <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--text-primary)' }}>Call Us</strong>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', display: 'block' }}>{contact?.phone || '+91 999 505 6728'}</span>
           </div>
         </a>
@@ -64,7 +64,7 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
             </svg>
           </div>
           <div style={{ textAlign: 'left', overflow: 'hidden' }}>
-            <strong style={{ display: 'block', fontSize: '1.1rem', color: '#fff' }}>Email</strong>
+            <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--text-primary)' }}>Email</strong>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', display: 'block' }}>{contact?.email || 'hello@zuloo.studio'}</span>
           </div>
         </a>
@@ -77,7 +77,7 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
             </svg>
           </div>
           <div style={{ textAlign: 'left', overflow: 'hidden' }}>
-            <strong style={{ display: 'block', fontSize: '1.1rem', color: '#fff' }}>Instagram</strong>
+            <strong style={{ display: 'block', fontSize: '1.1rem', color: 'var(--text-primary)' }}>Instagram</strong>
             <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden', display: 'block' }}>@{contact?.instagram || 'zuloo.studio'}</span>
           </div>
         </a>

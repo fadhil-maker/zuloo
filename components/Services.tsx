@@ -22,13 +22,13 @@ export default function Services({ services }: { services: Service[] }) {
       <div className="view-toggle-container">
         <button 
           onClick={() => { setViewMode('grid'); setHasToggled(true); }} 
-          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
+          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#FFF' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           Grid View
         </button>
         <button 
           onClick={() => { setViewMode('list'); setHasToggled(true); }} 
-          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'list' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'list' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
+          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'list' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'list' ? '#FFF' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           List View
         </button>

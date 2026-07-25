@@ -19,13 +19,13 @@ export default function Works({ works }: { works: Work[] }) {
       <div className="view-toggle-container">
         <button 
           onClick={() => { setViewMode('stack'); setHasToggled(true); }} 
-          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'stack' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'stack' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
+          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'stack' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'stack' ? '#FFF' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           Stack View
         </button>
         <button 
           onClick={() => { setViewMode('grid'); setHasToggled(true); }} 
-          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#000' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
+          style={{ padding: '0.5rem 1.5rem', borderRadius: '30px', fontWeight: 'bold', background: viewMode === 'grid' ? 'var(--accent)' : 'var(--glass-bg)', color: viewMode === 'grid' ? '#FFF' : 'var(--text-primary)', border: '1px solid var(--glass-border)', cursor: 'pointer', transition: 'all 0.3s' }}
         >
           Grid View
         </button>
@@ -80,7 +80,7 @@ export default function Works({ works }: { works: Work[] }) {
                   {work.tags && work.tags.length > 0 && (
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '2.5rem' }}>
                       {work.tags.map((tag) => (
-                        <span key={tag} style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid var(--glass-border)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold' }}>
+                        <span key={tag} style={{ background: 'var(--glass-bg)', border: '1px solid var(--glass-border)', padding: '0.4rem 1rem', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold' }}>
                           {tag}
                         </span>
                       ))}
