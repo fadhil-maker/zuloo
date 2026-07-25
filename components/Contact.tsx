@@ -4,7 +4,7 @@ import { ContactInfo } from '@/lib/supabase';
 
 export default function Contact({ contact }: { contact: ContactInfo | null }) {
   const whatsappUrl = contact?.whatsapp
-    ? `https://wa.me/${contact.whatsapp}?text=Hi%20ZULOO!%20I'm%20interested%20in%20building%20a%20website.`
+    ? `whatsapp://send?phone=${contact.whatsapp}&text=Hi%20ZULOO!%20I'm%20interested%20in%20building%20a%20website.`
     : '#';
   const emailUrl = contact?.email ? `mailto:${contact.email}` : '#';
   const instaUrl = contact?.instagram
