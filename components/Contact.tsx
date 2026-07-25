@@ -22,36 +22,42 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
         </p>
       </div>
 
-      <div className="grid reveal">
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', justifyContent: 'center' }}>
-          <span style={{ fontSize: '1.5rem' }}>💬</span>
+      <div className="reveal" style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+        gap: '1.5rem',
+        maxWidth: '900px',
+        margin: '0 auto'
+      }}>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', justifyContent: 'center', boxShadow: '0 8px 32px rgba(217,140,69,0.3)' }}>
+          <span style={{ fontSize: '1.8rem' }}>💬</span>
           <div style={{ textAlign: 'left' }}>
-            <strong style={{ display: 'block' }}>WhatsApp</strong>
-            <span style={{ fontSize: '0.8rem', fontWeight: 'normal', opacity: 0.8 }}>Chat with us now</span>
+            <strong style={{ display: 'block', fontSize: '1.2rem' }}>WhatsApp</strong>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'normal', opacity: 0.9 }}>Chat with us now</span>
           </div>
         </a>
 
         <a href={phoneUrl} className="btn btn-glass" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', justifyContent: 'center' }}>
-          <span style={{ fontSize: '1.5rem' }}>📞</span>
+          <span style={{ fontSize: '1.8rem' }}>📞</span>
           <div style={{ textAlign: 'left' }}>
-            <strong style={{ display: 'block' }}>Call Us</strong>
-            <span style={{ fontSize: '0.8rem', fontWeight: 'normal', opacity: 0.8 }}>{contact?.phone || '+91 999 505 6728'}</span>
+            <strong style={{ display: 'block', fontSize: '1.2rem' }}>Call Us</strong>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'normal', opacity: 0.8 }}>{contact?.phone || '+91 999 505 6728'}</span>
           </div>
         </a>
 
         <a href={emailUrl} className="btn btn-glass" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', justifyContent: 'center' }}>
-          <span style={{ fontSize: '1.5rem' }}>✉️</span>
+          <span style={{ fontSize: '1.8rem' }}>✉️</span>
           <div style={{ textAlign: 'left' }}>
-            <strong style={{ display: 'block' }}>Email</strong>
-            <span style={{ fontSize: '0.8rem', fontWeight: 'normal', opacity: 0.8 }}>{contact?.email || 'hello@zuloo.studio'}</span>
+            <strong style={{ display: 'block', fontSize: '1.2rem' }}>Email</strong>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'normal', opacity: 0.8 }}>{contact?.email || 'hello@zuloo.studio'}</span>
           </div>
         </a>
 
         <a href={instaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-glass" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1.5rem', justifyContent: 'center' }}>
-          <span style={{ fontSize: '1.5rem' }}>📸</span>
+          <span style={{ fontSize: '1.8rem' }}>📸</span>
           <div style={{ textAlign: 'left' }}>
-            <strong style={{ display: 'block' }}>Instagram</strong>
-            <span style={{ fontSize: '0.8rem', fontWeight: 'normal', opacity: 0.8 }}>@{contact?.instagram || 'zuloo.studio'}</span>
+            <strong style={{ display: 'block', fontSize: '1.2rem' }}>Instagram</strong>
+            <span style={{ fontSize: '0.9rem', fontWeight: 'normal', opacity: 0.8 }}>@{contact?.instagram || 'zuloo.studio'}</span>
           </div>
         </a>
       </div>

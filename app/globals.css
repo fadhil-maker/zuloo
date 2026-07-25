@@ -2,18 +2,19 @@
 
 /* 1. CSS Reset & Variables */
 :root {
-  --bg-color: #080808;
-  --glass-bg: rgba(255, 255, 255, 0.04);
+  --bg-color: #050505;
+  --glass-bg: rgba(255, 255, 255, 0.02);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --accent: #C8864A;
-  --accent-glow: rgba(200, 134, 74, 0.3);
-  --text-primary: #F0EDE8;
-  --text-secondary: #888888;
-  --radius-card: 16px;
+  --glass-highlight: rgba(255, 255, 255, 0.15);
+  --accent: #D98C45;
+  --accent-glow: rgba(217, 140, 69, 0.4);
+  --text-primary: #F5F2EC;
+  --text-secondary: #999999;
+  --radius-card: 24px;
   --radius-btn: 12px;
   
-  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  --glass-blur: blur(40px);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-blur: blur(20px);
 }
 
 *, *::before, *::after {
@@ -34,6 +35,10 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(217, 140, 69, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(217, 140, 69, 0.05), transparent 25%);
+  background-attachment: fixed;
 }
 
 /* 13. Selection color */
@@ -254,13 +259,16 @@ p {
   color: var(--bg-color);
 }
 .btn-glass {
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
   border: 1px solid var(--glass-border);
   backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
   color: var(--text-primary);
+  box-shadow: var(--glass-shadow);
 }
 .btn-glass:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
+  border-color: var(--glass-highlight);
   transform: translateY(-2px);
 }
 
@@ -278,23 +286,30 @@ p {
   .grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 }
 .glass-card {
-  background: var(--glass-bg);
+  background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
+  border-top: 1px solid var(--glass-highlight);
   border-radius: var(--radius-card);
-  padding: 2rem;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  padding: 2.5rem;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .glass-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px var(--accent-glow);
-  border-color: rgba(200, 134, 74, 0.3);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 20px rgba(217, 140, 69, 0.15);
+  border-color: rgba(217, 140, 69, 0.3);
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
 }
 .service-icon {
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: var(--accent);
   margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 1rem;
+  background: rgba(217, 140, 69, 0.1);
+  border-radius: 20px;
 }
 
 /* 5. Portfolio Grid with Image Hover Zoom */
