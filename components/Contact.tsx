@@ -24,9 +24,9 @@ export default function Contact({ contact }: { contact: ContactInfo | null }) {
 
       <div className="reveal" style={{ 
         display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', 
-        gap: '1rem',
-        maxWidth: '900px',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
+        gap: '1.5rem',
+        maxWidth: '800px',
         margin: '0 auto'
       }}>
         {/* WhatsApp */}
