@@ -25,9 +25,9 @@ export default async function Home() {
       <Navbar />
       <main>
         <Hero tagline={contact?.tagline} />
-        <Services services={services} />
-        <Works works={works} />
-        <Testimonials testimonials={testimonials} />
+        {contact?.show_services !== false && <Services services={services} />}
+        {contact?.show_works !== false && <Works works={works} />}
+        {contact?.show_testimonials !== false && <Testimonials testimonials={testimonials} />}
         <Contact contact={contact} />
       </main>
       <Footer />

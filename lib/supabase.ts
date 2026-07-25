@@ -16,6 +16,9 @@ export interface ContactInfo {
   whatsapp: string;
   instagram: string;
   tagline: string;
+  show_services: boolean;
+  show_works: boolean;
+  show_testimonials: boolean;
   updated_at: string;
 }
 

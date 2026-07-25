@@ -25,7 +25,7 @@ export default function AdminPage() {
   const [serviceForm, setServiceForm] = useState({ title: '', description: '', icon: '🌐', sort_order: 0 });
   const [workForm, setWorkForm] = useState({ title: '', description: '', image_url: '', live_url: '', tags: '' });
   const [testimonialForm, setTestimonialForm] = useState({ client_name: '', client_role: '', content: '', rating: 5 });
-  const [contactForm, setContactForm] = useState({ phone: '', email: '', whatsapp: '', instagram: '', tagline: '' });
+  const [contactForm, setContactForm] = useState({ phone: '', email: '', whatsapp: '', instagram: '', tagline: '', show_services: true, show_works: true, show_testimonials: true });
 
   const showToast = (msg: string) => {
     setToast(msg);
@@ -87,6 +87,9 @@ export default function AdminPage() {
         whatsapp: c.data.whatsapp || '',
         instagram: c.data.instagram || '',
         tagline: c.data.tagline || '',
+        show_services: c.data.show_services ?? true,
+        show_works: c.data.show_works ?? true,
+        show_testimonials: c.data.show_testimonials ?? true,
       });
     }
     setLoading(false);
@@ -372,7 +375,24 @@ export default function AdminPage() {
             <input className="admin-input" placeholder="zuloo.studio" value={contactForm.instagram} onChange={(e) => setContactForm({ ...contactForm, instagram: e.target.value })} />
             <label className="admin-label">Hero Tagline</label>
             <textarea className="admin-input" placeholder="Custom-crafted, mobile-first websites..." value={contactForm.tagline} onChange={(e) => setContactForm({ ...contactForm, tagline: e.target.value })} rows={2} />
-            <button type="submit" className="admin-btn admin-btn--primary">Update Contact Info</button>
+            
+            <h3 style={{ marginTop: '2rem' }}>Section Visibility</h3>
+            <p className="admin-label" style={{ marginBottom: '1rem' }}>Toggle sections on or off the live website.</p>
+            
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <input type="checkbox" checked={contactForm.show_services} onChange={(e) => setContactForm({ ...contactForm, show_services: e.target.checked })} style={{ width: '20px', height: '20px' }} />
+              <span>Show Services Section</span>
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <input type="checkbox" checked={contactForm.show_works} onChange={(e) => setContactForm({ ...contactForm, show_works: e.target.checked })} style={{ width: '20px', height: '20px' }} />
+              <span>Show Portfolio Section</span>
+            </label>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' }}>
+              <input type="checkbox" checked={contactForm.show_testimonials} onChange={(e) => setContactForm({ ...contactForm, show_testimonials: e.target.checked })} style={{ width: '20px', height: '20px' }} />
+              <span>Show Testimonials Section</span>
+            </label>
+
+            <button type="submit" className="admin-btn admin-btn--primary" style={{ marginTop: '1.5rem' }}>Update Settings</button>
           </form>
         )}
       </div>
