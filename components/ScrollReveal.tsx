@@ -8,7 +8,7 @@ export default function ScrollReveal() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
+            entry.target.classList.add('active'); // Fixed class name
             observer.unobserve(entry.target);
           }
         });

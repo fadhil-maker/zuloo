@@ -13,7 +13,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on resize to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) setIsOpen(false);
@@ -32,33 +31,38 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`} role="navigation" aria-label="Main navigation">
-      <div className="navbar__inner">
-        <a href="/" className="navbar__brand" aria-label="ZULOO Home">
+    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+      <div className="container nav-content">
+        <a href="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <Logo size={36} />
-          <span className="navbar__name">ZULOO</span>
+          ZULOO
         </a>
 
-        <div className={`navbar__links ${isOpen ? 'navbar__links--open' : ''}`}>
+        <div className="nav-links">
           <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Services</a>
           <a href="#works" onClick={(e) => handleNavClick(e, 'works')}>Works</a>
           <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')}>Reviews</a>
           <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a>
-          <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="navbar__cta">
+          <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="btn btn-primary" style={{ padding: '0.5rem 1rem' }}>
             Let&apos;s Talk
           </a>
         </div>
 
-        <button
-          className={`navbar__burger ${isOpen ? 'navbar__burger--open' : ''}`}
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label={isOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isOpen}
-        >
+        <button className="hamburger" onClick={() => setIsOpen(!isOpen)} aria-label="Menu">
           <span />
           <span />
           <span />
         </button>
+      </div>
+
+      <div className={`mobile-menu ${isOpen ? 'active' : ''}`}>
+        <a href="#services" onClick={(e) => handleNavClick(e, 'services')}>Services</a>
+        <a href="#works" onClick={(e) => handleNavClick(e, 'works')}>Works</a>
+        <a href="#testimonials" onClick={(e) => handleNavClick(e, 'testimonials')}>Reviews</a>
+        <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')}>Contact</a>
+        <a href="#contact" onClick={(e) => handleNavClick(e, 'contact')} className="btn btn-primary">
+          Let&apos;s Talk
+        </a>
       </div>
     </nav>
   );
