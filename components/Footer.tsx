@@ -5,8 +5,10 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-content">
         <div className="footer-left">
-          <Logo size={40} />
-          <h3 style={{ margin: 0, letterSpacing: '2px' }}>ZULOO</h3>
+          <a href="/" style={{ textDecoration: 'none', color: 'inherit', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+            <Logo size={40} />
+            <h3 style={{ margin: 0, letterSpacing: '2px' }}>ZULOO</h3>
+          </a>
           <p style={{ margin: 0, fontSize: '0.9rem' }}>Web Development Studio</p>
         </div>
 
